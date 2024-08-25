@@ -1,0 +1,46 @@
+.custom-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-btn button {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  border: 1px solid #85b7ec;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 8px;
+  background-color: #fff;
+  color: #85b7ec;
+}
+
+.custom-btn button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.custom-btn input {
+  width: 48px;
+  height: 48px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #666;
+}
+
+.custom-btn input[type="number"]::-webkit-inner-spin-button, 
+.custom-btn input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.custom-btn input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.custom-btn input:disabled {
+  background-color: #f0f0f0;
+  color: #aaa;
+}

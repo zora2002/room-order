@@ -1,0 +1,45 @@
+.order {
+  width: 450px;
+  height: auto;
+  border: 1px dotted  #000;
+  margin: 100px auto;
+  padding: 20px;
+}
+.situation {
+  font-size: 20px;
+  font-weight: 600;
+}
+.notyet{
+  width: 100%;
+  background-color: #85b7ec30;
+  padding: 16px;
+  margin: 20px 0 0 0;
+  font-size: 14px;
+  color: #666;
+}
+.room{
+  padding: 20px 0;
+  border-bottom: 1px solid #eee;
+}
+.room:last-child{
+  border-bottom: none;
+}
+.room-people{
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.room-setting{
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.type{
+  font-size: 16px;
+}
+.adult .type span{
+  display: block;
+  font-size: 14px;
+  color: #888;
+  margin: 10px 0;
+}

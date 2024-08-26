@@ -43,3 +43,11 @@
   color: #888;
   margin: 10px 0;
 }
+.oops{
+  width: 100%;
+  background-color: #eee;
+  margin: 20px 0;
+  padding: 50px;
+  text-align: center;
+  color: #aaa;
+}

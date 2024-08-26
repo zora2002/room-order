@@ -22,6 +22,10 @@ enum Age {
   Child,
 }
 
+const Oops = () => {
+  return <div className="oops">Oops...Please contact customer service</div>;
+};
+
 const RoomAllocation: React.FC<RoomAllocationProps> = ({
   guest,
   rooms,
@@ -62,57 +66,65 @@ const RoomAllocation: React.FC<RoomAllocationProps> = ({
       <div className="situation">
         住客人數：{guest.adult} 位大人，{guest.child} 位小孩 / {rooms.length} 房
       </div>
-      <div className="notyet">
-        尚未分配人數 : {guest.adult - hasRoom.adult} 位大人，{" "}
-        {guest.child - hasRoom.child} 位小孩
-      </div>
-      <div className="room-list">
-        {list.map((r, index, arr) => {
-          return (
-            <div className="room" key={index}>
-              <div className="room-people">房間: {r.child + r.adult} 人</div>
-              <div className="room-setting adult">
-                <div className="type">
-                  大人<span>年齡20+</span>
+      {list.length > 0 ? (
+        <>
+          <div className="notyet">
+            尚未分配人數 : {guest.adult - hasRoom.adult} 位大人，{" "}
+            {guest.child - hasRoom.child} 位小孩
+          </div>
+          <div className="room-list">
+            {list.map((r, index, arr) => {
+              return (
+                <div className="room" key={index}>
+                  <div className="room-people">
+                    房間: {r.child + r.adult} 人
+                  </div>
+                  <div className="room-setting adult">
+                    <div className="type">
+                      大人<span>年齡20+</span>
+                    </div>
+                    <CustomInputNumber
+                      min={0}
+                      max={rooms[index].capacity}
+                      step={1}
+                      name="customNumber"
+                      value={r.adult.toString()}
+                      maxDisabled={
+                        // 不能超過房間容納人數
+                        // 不能超過總大人人數
+                        r.child + r.adult >= rooms[index].capacity ||
+                        hasRoom.adult >= guest.adult
+                      }
+                      minDisabled={r.adult <= 1}
+                      onChange={(e) => handleChange(e, index, arr, Age.Adult)}
+                    />
+                  </div>
+                  <div className="room-setting child">
+                    <div className="type">小孩</div>
+                    <CustomInputNumber
+                      min={0}
+                      max={rooms[index].capacity}
+                      step={1}
+                      name="customNumber"
+                      value={r.child.toString()}
+                      maxDisabled={
+                        // 不能超過房間容納人數
+                        // 不能超過總小孩人數
+                        r.child + r.adult >= rooms[index].capacity ||
+                        hasRoom.child >= guest.child
+                      }
+                      minDisabled={r.child === 0}
+                      onChange={(e) => handleChange(e, index, arr, Age.Child)}
+                    />
+                  </div>
                 </div>
-                <CustomInputNumber
-                  min={0}
-                  max={rooms[index].capacity}
-                  step={1}
-                  name="customNumber"
-                  value={r.adult.toString()}
-                  maxDisabled={
-                    // 不能超過房間容納人數
-                    // 不能超過總大人人數
-                    r.child + r.adult >= rooms[index].capacity ||
-                    hasRoom.adult >= guest.adult
-                  }
-                  minDisabled={r.adult <= 1}
-                  onChange={(e) => handleChange(e, index, arr, Age.Adult)}
-                />
-              </div>
-              <div className="room-setting child">
-                <div className="type">小孩</div>
-                <CustomInputNumber
-                  min={0}
-                  max={rooms[index].capacity}
-                  step={1}
-                  name="customNumber"
-                  value={r.child.toString()}
-                  maxDisabled={
-                    // 不能超過房間容納人數
-                    // 不能超過總小孩人數
-                    r.child + r.adult >= rooms[index].capacity ||
-                    hasRoom.child >= guest.child
-                  }
-                  minDisabled={r.child === 0}
-                  onChange={(e) => handleChange(e, index, arr, Age.Child)}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <Oops />
+      )}
     </div>
   );
 };
